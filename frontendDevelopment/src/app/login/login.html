@@ -1,1 +1,65 @@
-<p>login works!</p>
+<div class="login-bg">
+
+  <!-- INCOME IMAGE BELOW -->
+  <div class="income-img">
+    <img src="/income.png" alt="Income">
+  </div>
+
+  <!-- TRAIN LOGO -->
+  <div class="logo">
+    <img src="/train.png" alt="Train Logo">
+  </div>
+
+  <!-- GLASS LOGIN CARD -->
+  <div class="login-card">
+
+    <h3>Commercial Dashboard</h3>
+    <h3>Login</h3>
+
+    <!-- LOGIN FORM -->
+    <form (ngSubmit)="login()" #loginForm="ngForm">
+
+      <!-- USERNAME -->
+      <div class="input-box icon-input">
+        <i class="bi bi-person left-icon"></i>
+        <input
+          type="text"
+          name="username"
+          [(ngModel)]="username"
+          (input)="errorMsg=''"
+          required
+        />
+        <label>Username</label>
+      </div>
+
+      <!-- PASSWORD -->
+      <div class="input-box icon-input">
+        <i class="bi bi-lock left-icon"></i>
+        <input
+          type="password"
+          name="password"
+          [(ngModel)]="password"
+          (input)="errorMsg=''"
+          required
+        />
+        <label>Password</label>
+      </div>
+
+      <!-- ERROR MESSAGE -->
+      <div *ngIf="errorMsg" class="error-msg">
+        {{ errorMsg }}
+      </div>
+
+      <!-- LOGIN BUTTON -->
+      <button
+        type="submit"
+        class="login-btn"
+        [disabled]="loginForm.invalid">
+        LOGIN
+      </button>
+
+    </form>
+
+  </div> <!-- login-card -->
+
+</div> <!-- login-bg -->
