@@ -1,25 +1,38 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\DB;
+
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
+
 class AuthController extends Controller
 {
     public function login(Request $request)
-{
-    $user = DB::table('users')
-        ->where('username', $request->username)
-        ->where('password', $request->password)
-        ->first();
+    {
+        $request->validate([
+            'username' => 'required',
+            'password' => 'required',
+        ]);
 
-    if (!$user) {
-        return response()->json(['error' => 'Invalid Credentials'], 401);
+        $user = DB::table('users')
+            ->where('username', $request->username)
+            ->where('password', $request->password) // ✅ plain check
+            ->first();
+
+        if (!$user) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Invalid credentials'
+            ], 401);
+        }
+
+        return response()->json([
+            'success' => true,
+            'navigate_to' => $user->role, // goods | parcel | admin
+            'user' => [
+                'id' => $user->id,
+                'username' => $user->username
+            ]
+        ]);
     }
-
-    return response()->json([
-        'success' => true,
-        'user' => $user
-    ]);
-}
 }
