@@ -45,21 +45,34 @@
         <label>Password</label>
       </div>
 
+      <!-- TYPE DROPDOWN -->
+      <div class="input-box icon-input">
+        <i class="bi bi-diagram-3 left-icon"></i>
+        <select
+          name="type"
+          [(ngModel)]="selectedType"
+          (change)="errorMsg=''"
+          required>
+          <option value="" disabled>Select Type</option>
+          <option value="goods">Goods</option>
+          <option value="parcels">Parcels</option>
+          <option value="earnings">Earnings</option>
+        </select>
+        <label>Type</label>
+      </div>
+
       <!-- ERROR MESSAGE -->
       <div *ngIf="errorMsg" class="error-msg">
         {{ errorMsg }}
       </div>
 
       <!-- LOGIN BUTTON -->
-      <button
-        type="submit"
-        class="login-btn"
-        [disabled]="loginForm.invalid">
+      <button type="submit" class="login-btn">
         LOGIN
       </button>
 
     </form>
 
-  </div> <!-- login-card -->
+  </div>
 
-</div> <!-- login-bg -->
+</div>
