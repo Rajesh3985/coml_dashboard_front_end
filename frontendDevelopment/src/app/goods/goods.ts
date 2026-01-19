@@ -1,11 +1,17 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-goods',
-  imports: [],
+   standalone: true,       // mark as standalone
+  imports: [CommonModule],
   templateUrl: './goods.html',
-  styleUrl: './goods.css',
+  styleUrls: ['./goods.css']
 })
 export class Goods {
+  currentPage: string = 'home';
 
+  navigate(page: string) {
+    this.currentPage = page;
+  }
 }

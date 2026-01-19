@@ -1,1 +1,41 @@
-<p>earnings works!</p>
+<div class="container">
+
+  <!-- Sidebar Navigation -->
+  <nav class="sidebar">
+    <ul>
+      <li [class.active]="currentPage === 'home'" (click)="navigate('home')">
+        <i class="bi bi-house"></i>
+        <span>Home</span>
+      </li>
+      <li [class.active]="currentPage === 'search'" (click)="navigate('search')">
+        <i class="bi bi-search"></i>
+        <span>Search</span>
+      </li>
+      <li [class.active]="currentPage === 'orders'" (click)="navigate('orders')">
+        <i class="bi bi-bag"></i>
+        <span>Orders</span>
+      </li>
+      <li [class.active]="currentPage === 'profile'" (click)="navigate('profile')">
+        <i class="bi bi-person"></i>
+        <span>Profile</span>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Page Content -->
+  <div class="page-content">
+    <div *ngIf="currentPage === 'home'" class="home-page">
+      <img src="/assets/home-image.png" alt="Home Image" />
+    </div>
+    <div *ngIf="currentPage === 'search'">
+      <h2>Search Page</h2>
+    </div>
+    <div *ngIf="currentPage === 'orders'">
+      <h2>Orders Page</h2>
+    </div>
+    <div *ngIf="currentPage === 'profile'">
+      <h2>Profile Page</h2>
+    </div>
+  </div>
+
+</div>

@@ -33,7 +33,7 @@ html, body {
   left: 50%;
   transform: translateX(-50%);
   width: 720px;
-  height: 400px;
+  height: 420px;
   overflow: hidden;
   border-radius: 50% 50% 0 0;
   z-index: 1;
@@ -52,7 +52,7 @@ html, body {
 ========================= */
 .logo {
   position: absolute;
-  top: 50px;
+  top: 63px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 5;
@@ -66,7 +66,7 @@ html, body {
 }
 
 /* =========================
-   LOGIN CARD (TRUE GLASS)
+   LOGIN CARD (GLASS EFFECT)
 ========================= */
 .login-card {
   position: absolute;
@@ -79,18 +79,16 @@ html, body {
   text-align: center;
   z-index: 10;
 
-  /* REAL TRANSPARENCY */
-  background: rgba(200, 200, 200, 0.1);
+  /* GLASS / TRANSPARENT BACKGROUND */
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(0.1px);
+  -webkit-backdrop-filter: blur(1px);
 
-  /* STRONG BLUR */
-  backdrop-filter: blur(0.2px);
-  -webkit-backdrop-filter: blur(20px);
-
-  border: 1px solid rgba(255, 255, 255, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.25);
 
   box-shadow:
-    0 8px 40px rgba(0, 217, 255, 0.45),
-    inset 0 0 25px rgba(255, 255, 255, 0.15);
+    0 8px 40px rgba(0, 217, 255, 0.25),
+    inset 0 0 25px rgba(255, 255, 255, 0.05);
 }
 
 /* =========================
@@ -103,7 +101,7 @@ html, body {
   border-radius: 25px;
   background: linear-gradient(
     120deg,
-    rgba(255,255,255,0.35),
+    rgba(255,255,255,0.2),
     rgba(255,255,255,0)
   );
   pointer-events: none;
@@ -128,26 +126,25 @@ html, body {
 }
 
 /* =========================
-   INPUTS (CLEAR & SOLID)
+   INPUTS (LIGHT COLOR & DARK TEXT)
 ========================= */
 .input-box input,
 .input-box select {
   width: 100%;
   padding: 14px 15px 14px 42px;
 
-  background: rgba(10, 18, 35, 0.95);  /* SOLID */
-  color: #ffffff;
+  background: rgba(150, 221, 241, 0.85); /* LIGHT INPUT */
+  color: #0b0b0b;                         /* DARK TEXT */
   font-size: 15px;
   font-weight: 500;
 
   border-radius: 25px;
-  border: 1px solid rgba(255,255,255,0.4);
+  border: 1px solid rgba(0,0,0,0.25);
   outline: none;
 
   appearance: none;
   cursor: pointer;
 
-  backdrop-filter: none;
   transition: 0.3s ease;
 }
 
@@ -157,7 +154,8 @@ html, body {
 .input-box input:focus,
 .input-box select:focus {
   border-color: #00eaff;
-  box-shadow: 0 0 12px rgba(0,234,255,0.8);
+  box-shadow: 0 0 12px rgba(0,234,255,0.5);
+  background: rgb(158, 241, 252); /* slightly brighter on focus */
 }
 
 /* =========================
@@ -168,7 +166,7 @@ html, body {
   left: 42px;
   top: 50%;
   transform: translateY(-50%);
-  color: #d4f4ff;
+  color: #0b0b0b;
   font-size: 14px;
   pointer-events: none;
   transition: 0.3s;
@@ -179,7 +177,7 @@ html, body {
 .input-box select:valid + label {
   top: -8px;
   font-size: 12px;
-  color: #00eaff;
+  color: #011319;
 }
 
 /* =========================
@@ -190,7 +188,7 @@ html, body {
   left: 14px;
   top: 50%;
   transform: translateY(-50%);
-  color: #b9f3ff;
+  color: #0072ff;
   font-size: 16px;
   pointer-events: none;
 }
