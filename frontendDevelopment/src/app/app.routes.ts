@@ -6,17 +6,18 @@ import { Parcels } from './parcels/parcels';
 import { Earnings } from './earnings/earnings';
 
 export const routes: Routes = [
-  // Login
+
+  // Login page
   { path: '', component: LoginComponent },
 
-  // Common Home
+  // Optional common home (if needed)
   { path: 'home', component: Home },
 
-  // Type-based homes
-  { path: 'goods-home', component: Goods },
-  { path: 'parcels-home', component: Parcels },
-  { path: 'earnings-home', component: Earnings },
+  // Role-based pages (from backend)
+  { path: 'goods', component: Goods },
+  { path: 'parcels', component: Parcels },
+  { path: 'earnings', component: Earnings },
 
-  // Fallback
+  // Wildcard fallback
   { path: '**', redirectTo: '' }
 ];

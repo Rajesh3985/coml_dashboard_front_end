@@ -15,7 +15,6 @@ export class LoginComponent {
 
   username = '';
   password = '';
-  selectedType = '';   // ✅ added
   errorMsg = '';
   showPassword = false;
 
@@ -23,8 +22,8 @@ export class LoginComponent {
 
   login(): void {
 
-    if (!this.selectedType) {
-      this.errorMsg = 'Please select a type';
+    if (!this.username || !this.password) {
+      this.errorMsg = 'Username and Password are required';
       return;
     }
 
@@ -32,17 +31,19 @@ export class LoginComponent {
       username: this.username,
       password: this.password
     }).subscribe({
-      next: () => {
-        // ✅ navigation based on selected type
-        if (this.selectedType === 'goods') {
-          this.router.navigate(['/goods-home']);
-        } else if (this.selectedType === 'parcels') {
-          this.router.navigate(['/parcels-home']);
-        } else if (this.selectedType === 'earnings') {
-          this.router.navigate(['/earnings-home']);
+      next: (res: any) => {
+
+        // ✅ navigate based on backend role
+        if (res.success && res.navigate_to) {
+          this.router.navigate(['/' + res.navigate_to]);
+        } else {
+          this.errorMsg = 'Login failed';
         }
+
       },
-      error: () => this.errorMsg = 'Invalid Username or Password'
+      error: () => {
+        this.errorMsg = 'Invalid Username or Password';
+      }
     });
   }
 }

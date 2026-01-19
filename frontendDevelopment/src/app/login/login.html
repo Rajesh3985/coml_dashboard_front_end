@@ -45,22 +45,6 @@
         <label>Password</label>
       </div>
 
-      <!-- TYPE DROPDOWN -->
-      <div class="input-box icon-input">
-        <i class="bi bi-diagram-3 left-icon"></i>
-        <select
-          name="type"
-          [(ngModel)]="selectedType"
-          (change)="errorMsg=''"
-          required>
-          <option value="" disabled>Select Type</option>
-          <option value="goods">Goods</option>
-          <option value="parcels">Parcels</option>
-          <option value="earnings">Earnings</option>
-        </select>
-        
-      </div>
-
       <!-- ERROR MESSAGE -->
       <div *ngIf="errorMsg" class="error-msg">
         {{ errorMsg }}

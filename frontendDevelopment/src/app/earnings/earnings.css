@@ -55,8 +55,12 @@
   align-items: center;
 }
 
-.page-content img {
-  max-width: 80%;
+
+ .page-content img {
+  max-width: 100%;         /* Prevents image from overflowing container */
   border-radius: 15px;
   box-shadow: 0 0 20px rgba(0, 114, 255, 0.6);
+  width: 1580px;            /* Increased width */
+  height: 680px;          /* Increased height with proper unit */
+  object-fit: cover;       /* Ensures the image scales nicely */
 }
