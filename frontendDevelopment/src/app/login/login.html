@@ -33,17 +33,27 @@
       </div>
 
       <!-- PASSWORD -->
-      <div class="input-box icon-input">
-        <i class="bi bi-lock left-icon"></i>
-        <input
-          type="password"
-          name="password"
-          [(ngModel)]="password"
-          (input)="errorMsg=''"
-          required
-        />
-        <label>Password</label>
-      </div>
+<div class="input-box icon-input password-box">
+  <i class="bi bi-lock left-icon"></i>
+
+  <input
+    type="password"
+    name="password"
+    [(ngModel)]="password"
+    (input)="errorMsg=''"
+    required
+    id="password"
+  />
+
+  <!-- EYE ICON -->
+  <i class="bi bi-eye right-icon"
+     onclick="const p=document.getElementById('password'); 
+              this.classList.toggle('bi-eye-slash'); 
+              p.type = p.type === 'password' ? 'text' : 'password';">
+  </i>
+
+  <label>Password</label>
+</div>
 
       <!-- ERROR MESSAGE -->
       <div *ngIf="errorMsg" class="error-msg">

@@ -172,13 +172,15 @@ html, body {
   transition: 0.3s;
 }
 
-.input-box input:focus + label,
-.input-box input:valid + label,
-.input-box select:valid + label {
+/* FLOAT LABEL – USERNAME & PASSWORD SAME */
+.input-box input:focus ~ label,
+.input-box input:valid ~ label,
+.input-box select:valid ~ label {
   top: -8px;
   font-size: 12px;
   color: #011319;
 }
+
 
 /* =========================
    LEFT ICON
@@ -240,3 +242,21 @@ html, body {
 .input-box select option {
   color: #000;
 }
+.password-box {
+  position: relative;
+}
+
+.right-icon {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #3262da;
+}
+
+.right-icon:hover {
+  color: #3565f5;
+}
+
