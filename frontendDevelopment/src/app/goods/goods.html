@@ -5,7 +5,7 @@
     <ul>
       <li [class.active]="currentPage === 'home'" (click)="navigate('home')">
         <i class="bi bi-house"></i>
-       <span>Home</span>
+        <span>Home</span>
       </li>
       <li [class.active]="currentPage === 'input'" (click)="navigate('input')">
         <i class="bi bi-pencil-square"></i>
@@ -17,21 +17,24 @@
   <!-- Page Content -->
   <div class="page-content">
 
-    <!-- INPUT PAGE -->
+    <!-- ================= HOME PAGE ================= -->
+    <div *ngIf="currentPage === 'home'" class="home-page">
+      <h2>Welcome to Goods Dashboard</h2>
+      <p>Select <b>Input</b> to enter and view goods data.</p>
+    </div>
+
+    <!-- ================= INPUT PAGE ================= -->
     <div *ngIf="currentPage === 'input'" class="input-page">
 
-      <h2 class="input-title">Goods Entry </h2>
+      <h2 class="input-title">Goods Entry</h2>
 
+      <!-- INPUT TABLE -->
       <div class="table">
-
-        
-
-        <!-- Single Table Row -->
         <div class="table-row">
           <span>1</span>
 
-          <input [(ngModel)]="goodsRow.from" placeholder="From">
-          <input [(ngModel)]="goodsRow.to" placeholder="To">
+          <input [(ngModel)]="goodsRow.from_station" placeholder="From Station">
+          <input [(ngModel)]="goodsRow.to_station" placeholder="To Station">
 
           <select [(ngModel)]="goodsRow.commodity">
             <option value="">Select</option>
@@ -42,17 +45,50 @@
           </select>
 
           <input type="number" [(ngModel)]="goodsRow.wagons" placeholder="Wagons">
-          <input type="text" [(ngModel)]="goodsRow.type" placeholder="Type">
+          <input [(ngModel)]="goodsRow.wagon_type" placeholder="Wagon Type">
           <input type="number" [(ngModel)]="goodsRow.tonnage" placeholder="Tonnage">
           <input type="number" [(ngModel)]="goodsRow.freight" placeholder="Freight">
-          <input type="text" [(ngModel)]="goodsRow.rrNumber" placeholder="RR Number">
+          <input [(ngModel)]="goodsRow.rr_number" placeholder="RR Number">
         </div>
-
       </div>
 
       <button class="submit-btn" (click)="submitGoods()">Submit</button>
 
-    </div>
+      <!-- ================= GOODS LIST ================= -->
+      <h2 class="input-title" style="margin-top:30px;">Goods List</h2>
 
+      <div class="table" *ngIf="goodsList.length > 0">
+
+        <div class="table-row table-header">
+          <span>#</span>
+          <span>From</span>
+          <span>To</span>
+          <span>Commodity</span>
+          <span>Wagons</span>
+          <span>Type</span>
+          <span>Tonnage</span>
+          <span>Freight</span>
+          <span>RR No</span>
+        </div>
+
+        <div class="table-row" *ngFor="let g of goodsList; let i = index">
+          <span>{{ i + 1 }}</span>
+          <span>{{ g.from_station }}</span>
+          <span>{{ g.to_station }}</span>
+          <span>{{ g.commodity }}</span>
+          <span>{{ g.wagons }}</span>
+          <span>{{ g.wagon_type }}</span>
+          <span>{{ g.tonnage }}</span>
+          <span>{{ g.freight }}</span>
+          <span>{{ g.rr_number }}</span>
+        </div>
+
+      </div>
+
+      <p *ngIf="goodsList.length === 0" style="margin-top:20px;">
+        No goods data available.
+      </p>
+
+    </div>
   </div>
 </div>

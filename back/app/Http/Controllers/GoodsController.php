@@ -13,24 +13,25 @@ class GoodsController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'from_station'   => 'required|string',
-            'to_station'     => 'required|string',
-            'commodity'      => 'required|string',
-            'wagons'         => 'required|integer',
-            'wagon_type'     => 'required|string',
-            'tonnage'        => 'required|numeric',
-            'freight'        => 'required|numeric',
-            'rr_number'      => 'required|string',
-            'placement_date' => 'required|date',
-            'placement_time' => 'required',
-            'free_time_from' => 'required',
-            'free_time_to'   => 'required',
-            'release_date'   => 'required|date',
-            'release_time'   => 'required',
-            'kms'            => 'required|integer'
+            'from_station' => 'required|string',
+            'to_station'   => 'required|string',
+            'commodity'    => 'required|string',
+            'wagons'       => 'required|integer',
+            'wagon_type'   => 'required|string',
+            'tonnage'      => 'required|numeric',
+            'freight'      => 'required|numeric',
+            'rr_number'    => 'required|string',
+
+            // OPTIONAL FIELDS
+            'placement_date' => 'nullable|date',
+            'placement_time' => 'nullable',
+            'free_time_from' => 'nullable',
+            'free_time_to'   => 'nullable',
+            'release_date'   => 'nullable|date',
+            'release_time'   => 'nullable',
+            'kms'            => 'nullable|integer',
         ]);
 
-        // ✅ CORRECT METHOD
         $goods = Goods::create($validated);
 
         return response()->json([
@@ -45,7 +46,6 @@ class GoodsController extends Controller
      */
     public function index()
     {
-        // ✅ CORRECT METHOD
         $goods = Goods::orderBy('id', 'desc')->get();
 
         return response()->json([
@@ -55,7 +55,7 @@ class GoodsController extends Controller
     }
 
     /**
-     * View single goods record (ID FROM POST BODY)
+     * View single goods record
      */
     public function show(Request $request)
     {
@@ -63,7 +63,6 @@ class GoodsController extends Controller
             'id' => 'required|integer'
         ]);
 
-        // ✅ CORRECT METHOD
         $goods = Goods::find($request->id);
 
         if (!$goods) {
@@ -80,7 +79,7 @@ class GoodsController extends Controller
     }
 
     /**
-     * Update goods record (ID FROM POST BODY)
+     * Update goods record
      */
     public function update(Request $request)
     {
@@ -107,7 +106,7 @@ class GoodsController extends Controller
     }
 
     /**
-     * Delete goods record (ID FROM POST BODY)
+     * Delete goods record
      */
     public function destroy(Request $request)
     {

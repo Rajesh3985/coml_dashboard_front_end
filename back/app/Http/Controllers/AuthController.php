@@ -14,7 +14,7 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
 
-        $user = DB::table('users')
+        $user = DB::table('user')
             ->where('username', $request->username)
             ->where('password', $request->password) // ✅ plain check
             ->first();

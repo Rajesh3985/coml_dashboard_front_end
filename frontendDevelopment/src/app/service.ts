@@ -1,5 +1,5 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -7,54 +7,48 @@ import { Observable } from 'rxjs';
 })
 export class ApiService {
 
-  // Base URL for API
-  baseUrl = 'http://localhost:8000/api';
+  private baseUrl = 'http://127.0.0.1:8000/api'; 
+  // 🔁 change port if needed
 
   constructor(private http: HttpClient) {}
 
-  /* ================= AUTH ================= */
+  /* =========================
+     AUTH
+  ========================== */
+
   login(data: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/login`, data);
   }
 
-  logout(): Observable<any> {
-    return this.http.post(`${this.baseUrl}/logout`, {});
+  /* =========================
+     GOODS
+  ========================== */
+
+  // Store goods
+  storeGoods(data: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/goods/store`, data);
   }
 
-  /* ================= GOODS ================= */
-  // Submit single goods row
-  submitGoods(goodsData: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}/goods`, goodsData);
+  // List goods
+  listGoods(): Observable<any> {
+    return this.http.post(`${this.baseUrl}/goods/list`, {});
   }
 
-  // Fetch all goods
-  getGoods(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/goods`);
+  // View single goods (by id)
+  viewGoods(id: number): Observable<any> {
+    return this.http.post(`${this.baseUrl}/goods/view`, { id });
   }
 
-  // Fetch single goods by ID
-  getGoodsById(id: number | string): Observable<any> {
-    return this.http.get(`${this.baseUrl}/goods/${id}`);
+  // Update goods
+  updateGoods(id: number, data: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/goods/update`, {
+      id,
+      ...data
+    });
   }
 
-  // Update goods by ID
-  updateGoods(id: number | string, goodsData: any): Observable<any> {
-    return this.http.put(`${this.baseUrl}/goods/${id}`, goodsData);
-  }
-
-  // Delete goods by ID
-  deleteGoods(id: number | string): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/goods/${id}`);
-  }
-
-  /* ================= OTHER API CALLS ================= */
-  // Example: fetch commodities list
-  getCommodities(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/commodities`);
-  }
-
-  // Example: fetch orders
-  getOrders(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/orders`);
+  // Delete goods
+  deleteGoods(id: number): Observable<any> {
+    return this.http.post(`${this.baseUrl}/goods/delete`, { id });
   }
 }

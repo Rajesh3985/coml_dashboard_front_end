@@ -10,7 +10,7 @@ class User extends Model
     use HasFactory;
 
     // Table name
-    protected $table = 'users';
+    protected $table = 'user';
 
     // Disable timestamps (if not using created_at, updated_at)
     public $timestamps = false;

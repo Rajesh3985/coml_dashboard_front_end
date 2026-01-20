@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ApiService } from '../service';  // adjust path
+import { ApiService } from '../service';
 
 @Component({
   selector: 'app-goods',
@@ -11,38 +11,89 @@ import { ApiService } from '../service';  // adjust path
   templateUrl: './goods.html',
   styleUrls: ['./goods.css']
 })
-export class Goods {
+export class Goods implements OnInit {
 
-  currentPage = 'home';
+  currentPage: string = 'input';
 
-  goodsRow = {
-    from: '',
-    to: '',
+  goodsRow: any = {
+    from_station: '',
+    to_station: '',
     commodity: '',
     wagons: null,
-    type: '',
+    wagon_type: '',
     tonnage: null,
     freight: null,
-    rrNumber: ''
+    rr_number: '',
+    placement_date: '',
+    placement_time: '',
+    free_time_from: '',
+    free_time_to: '',
+    release_date: '',
+    release_time: '',
+    kms: null
   };
+
+  goodsList: any[] = [];
 
   constructor(private api: ApiService, private router: Router) {}
 
-  navigate(page: string) {
+  ngOnInit(): void {
+    this.loadGoods();
+  }
+
+  navigate(page: string): void {
     this.currentPage = page;
   }
 
-  submitGoods() {
-    this.api.submitGoods(this.goodsRow).subscribe({
+  // ✅ SUBMIT GOODS (NO LOGIC CHANGE)
+  submitGoods(): void {
+    this.api.storeGoods(this.goodsRow).subscribe({
       next: (res) => {
-        console.log('Data submitted successfully', res);
-        alert('Goods data submitted successfully!');
-        this.goodsRow = { from: '', to: '', commodity: '', wagons: null, type: '', tonnage: null, freight: null, rrNumber: '' };
+        if (res?.success) {
+          alert('Goods submitted successfully');
+          this.resetForm();
+          this.loadGoods();
+        } else {
+          alert('Submission failed');
+        }
       },
       error: (err) => {
-        console.error('Error submitting data', err);
-        alert('Failed to submit goods data.');
+        console.error(err);
+        alert('Failed to submit goods');
       }
     });
+  }
+
+  // ✅ LOAD GOODS LIST (FIXED RESPONSE HANDLING)
+  loadGoods(): void {
+    this.api.listGoods().subscribe({
+      next: (res) => {
+        this.goodsList = res?.data ?? [];
+      },
+      error: (err) => {
+        console.error('Error loading goods:', err);
+        this.goodsList = [];
+      }
+    });
+  }
+
+  resetForm(): void {
+    this.goodsRow = {
+      from_station: '',
+      to_station: '',
+      commodity: '',
+      wagons: null,
+      wagon_type: '',
+      tonnage: null,
+      freight: null,
+      rr_number: '',
+      placement_date: '',
+      placement_time: '',
+      free_time_from: '',
+      free_time_to: '',
+      release_date: '',
+      release_time: '',
+      kms: null
+    };
   }
 }
