@@ -1,18 +1,26 @@
+/* ===============================
+   MAIN CONTAINER
+================================ */
 .goods-container {
   display: flex;
   height: 100vh;
-  background: #0a0f1f;
+  background: url('/good.jpg.png') no-repeat center center;
+  background-size: cover;
   color: #fff;
+  font-family: 'Segoe UI', sans-serif;
 }
 
-/* Sidebar */
+/* ===============================
+   SIDEBAR
+================================ */
 .sidebar {
   width: 80px;
-  background: #1c1f2a;
+  background: rgba(28, 31, 42, 0.95);
   display: flex;
   flex-direction: column;
   align-items: center;
   padding-top: 20px;
+  border-right: 1px solid #1e293b;
 }
 
 .sidebar ul {
@@ -46,21 +54,144 @@
   font-size: 12px;
 }
 
-/* Page Content */
+/* ===============================
+   PAGE CONTENT
+================================ */
 .page-content {
   flex: 1;
   padding: 20px;
   display: flex;
   justify-content: center;
+  align-items: flex-start; /* ONLY CHANGE */
+}
+
+/* ===============================
+   INPUT PAGE
+================================ */
+.input-page {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  border-radius: 18px;
+  width: 100%;
+  max-width: 1300px;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+  margin-top: 20px;
+}
+
+/* ===============================
+   TITLE
+================================ */
+.input-title {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* ===============================
+   TABLE ROW
+================================ */
+.table-row {
+  display: grid;
+  grid-template-columns: 50px repeat(9, 1fr);
+  gap: 12px;
   align-items: center;
+  overflow-x: auto;
+  padding: 8px 0;
 }
 
-.page-content img {
-  max-width: 100%;         /* Prevents image from overflowing container */
-  border-radius: 15px;
-  box-shadow: 0 0 20px rgba(0, 114, 255, 0.6);
-  width: 1580px;            /* Increased width */
-  height: 680px;          /* Increased height with proper unit */
-  object-fit: cover;       /* Ensures the image scales nicely */
+/* ===============================
+   INPUT & SELECT FIELDS
+================================ */
+.table-row input,
+.table-row select {
+  padding: 10px;
+  border-radius: 12px;
+  border: 1px solid #1e293b;
+  background: rgba(2, 6, 23, 0.7);
+  color: #fff;
+  font-size: 14px;
+  outline: none;
+  transition: 0.25s ease;
+  text-align: center;
 }
 
+/* Placeholder */
+.table-row input::placeholder {
+  color: #edf1f6;
+}
+
+/* Focus effect */
+.table-row input:focus,
+.table-row select:focus {
+  border-color: #38bdf8;
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.45);
+}
+
+/* Dropdown cursor */
+.table-row select {
+  cursor: pointer;
+  text-align-last: center;
+}
+
+/* ===============================
+   SCROLLBAR
+================================ */
+.table-row::-webkit-scrollbar {
+  height: 8px;
+}
+
+.table-row::-webkit-scrollbar-track {
+  background: rgba(2, 6, 23, 0.7);
+  border-radius: 10px;
+}
+
+.table-row::-webkit-scrollbar-thumb {
+  background: #1282dd;
+  border-radius: 10px;
+}
+
+/* ===============================
+   SUBMIT BUTTON
+================================ */
+.submit-btn {
+  margin-top: 20px;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  background: #1a73e8;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+  width: 150px;
+  align-self: center;
+}
+
+.submit-btn:hover {
+  background: #155ab6;
+}
+
+/* ===============================
+   RESPONSIVE
+================================ */
+@media screen and (max-width: 1024px) {
+  .table-row {
+    grid-template-columns: 50px repeat(9, minmax(100px, 1fr));
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .table-row input,
+  .table-row select {
+    font-size: 12px;
+    padding: 6px;
+  }
+
+  .submit-btn {
+    width: 100%;
+  }
+}
