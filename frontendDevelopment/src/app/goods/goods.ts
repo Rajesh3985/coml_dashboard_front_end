@@ -45,10 +45,11 @@ export class Goods implements OnInit {
     this.currentPage = page;
   }
 
-  // ✅ SUBMIT GOODS (NO LOGIC CHANGE)
+  // ✅ SUBMIT GOODS
   submitGoods(): void {
     this.api.storeGoods(this.goodsRow).subscribe({
       next: (res) => {
+        console.log('Submit Response:', res);
         if (res?.success) {
           alert('Goods submitted successfully');
           this.resetForm();
@@ -58,17 +59,19 @@ export class Goods implements OnInit {
         }
       },
       error: (err) => {
-        console.error(err);
+        console.error('Error submitting goods:', err);
         alert('Failed to submit goods');
       }
     });
   }
 
-  // ✅ LOAD GOODS LIST (FIXED RESPONSE HANDLING)
+  // ✅ LOAD GOODS LIST
   loadGoods(): void {
     this.api.listGoods().subscribe({
       next: (res) => {
-        this.goodsList = res?.data ?? [];
+        console.log('Goods API Response:', res);  // Debug API response
+        // ✅ Use new array reference to trigger change detection
+        this.goodsList = res?.data ? [...res.data] : [];
       },
       error: (err) => {
         console.error('Error loading goods:', err);
@@ -77,6 +80,7 @@ export class Goods implements OnInit {
     });
   }
 
+  // Reset form after submit
   resetForm(): void {
     this.goodsRow = {
       from_station: '',

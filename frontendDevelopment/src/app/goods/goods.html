@@ -17,14 +17,7 @@
   <!-- Page Content -->
   <div class="page-content">
 
-    <!-- ================= HOME PAGE ================= -->
-    <div *ngIf="currentPage === 'home'" class="home-page">
-      <h2>Welcome to Goods Dashboard</h2>
-      <p>Select <b>Input</b> to enter and view goods data.</p>
-    </div>
-
-    <!-- ================= INPUT PAGE ================= -->
-    <div *ngIf="currentPage === 'input'" class="input-page">
+    <div class="input-page">
 
       <h2 class="input-title">Goods Entry</h2>
 
@@ -32,7 +25,6 @@
       <div class="table">
         <div class="table-row">
           <span>1</span>
-
           <input [(ngModel)]="goodsRow.from_station" placeholder="From Station">
           <input [(ngModel)]="goodsRow.to_station" placeholder="To Station">
 
@@ -54,7 +46,7 @@
 
       <button class="submit-btn" (click)="submitGoods()">Submit</button>
 
-      <!-- ================= GOODS LIST ================= -->
+      <!-- DISPLAY TABLE -->
       <h2 class="input-title" style="margin-top:30px;">Goods List</h2>
 
       <div class="table" *ngIf="goodsList.length > 0">
@@ -90,5 +82,6 @@
       </p>
 
     </div>
+
   </div>
 </div>
